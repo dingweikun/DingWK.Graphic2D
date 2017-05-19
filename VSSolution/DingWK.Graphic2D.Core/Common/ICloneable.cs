@@ -1,4 +1,4 @@
-﻿namespace DingWK.Graphic2D.Common
+﻿namespace DingWK.Graphic2D.Core.Common
 {
     public interface ICloneable
     {

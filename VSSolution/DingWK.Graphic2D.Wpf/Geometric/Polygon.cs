@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
+using System.Windows;
+using System.Windows.Media;
 
-namespace DingWK.Graphic2D.Geometric
+namespace DingWK.Graphic2D.Wpf.Geometric
 {
     public sealed class Polygon : Geometry
     {
         public const int MinVertexCount = 3;
 
-        private List<Vector2> _vertex;
+        private List<Vector> _vertex;
         
-        public Polygon(ICollection<Vector2> vertex)
+        public Polygon(ICollection<Vector> vertex)
         {
             Vertex = vertex;
         }
         
-        public ICollection<Vector2> Vertex
+        public ICollection<Vector> Vertex
         {
             get => _vertex.ToArray();
             set
@@ -28,16 +29,12 @@ namespace DingWK.Graphic2D.Geometric
                 _vertex = value.ToList();
             }
         }
-
-        protected override Vector2[] GeometryTransformVectors => Vertex as Vector2[];
-                
+           
         public override object Clone() => new Polygon(Vertex);
-        
-        protected override void SetGeometryTransformVectors(Vector2[] vectors)
-        {
-            base.SetGeometryTransformVectors(vectors);
-            Vertex = vectors;
-        }
 
+        public override void Transform(Matrix matrix)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

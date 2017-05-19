@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Numerics;
-using DingWK.Graphic2D.Common;
+using DingWK.Graphic2D.Core.Common;
 
 namespace DingWK.Graphic2D.Geometric
 {
@@ -35,15 +35,15 @@ namespace DingWK.Graphic2D.Geometric
         /// </summary>
         public static void Transform<T>(T geometry, Matrix3x2 matrix) where T : Geometry
         {
-            if(geometry!=null)
+            if (geometry != null)
             {
                 var vecotrs = geometry.GeometryTransformVectors;
-                for(int i=0; i<vecotrs.Length;i++)
+                for (int i = 0; i < vecotrs.Length; i++)
                 {
                     vecotrs[i] = Vector2.Transform(vecotrs[i], matrix);
                 }
                 geometry.SetGeometryTransformVectors(vecotrs);
-             }
+            }
         }
 
         /// <summary>

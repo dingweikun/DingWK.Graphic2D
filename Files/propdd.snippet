@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>定义一个 DependencyProperty</Title>
+            <Shortcut>propdd</Shortcut>
+            <Description>将 DependencyProperty 用作后备存储的属性的代码片段</Description>
+            <Author>DingWK</Author>
+            <SnippetTypes>
+                <SnippetType>Expansion</SnippetType>
+            </SnippetTypes>
+        </Header>
+        <Snippet>
+            <Declarations>
+                <Literal>
+                    <ID>type</ID>
+                    <ToolTip>属性类型</ToolTip>
+                    <Default>int</Default>
+                </Literal>
+                <Literal>
+                    <ID>property</ID>
+                    <ToolTip>属性名</ToolTip>
+                    <Default>MyProperty</Default>
+                </Literal>
+                <Literal>
+                    <ID>ownerclass</ID>
+                    <ToolTip>此属性的所属类。  通常是在其中声明此属性的类。</ToolTip>
+                    <Default>ownerclass</Default>
+                </Literal>
+                <Literal>
+                    <ID>defaultvalue</ID>
+                    <ToolTip>此属性的默认值。</ToolTip>
+                    <Default>0</Default>
+                </Literal>
+            </Declarations>
+            <Code Language="csharp">
+                <![CDATA[
+
+#region $property$
+/// <summary>
+/// 
+/// </summary>
+public $type$ $property$
+{
+    get { return ($type$)GetValue($property$Property); }
+    set { SetValue($property$Property, value); }
+}
+//
+// Dependency property definition
+//
+public static readonly DependencyProperty $property$Property = 
+    DependencyProperty.Register(
+		nameof($property$),
+		typeof($type$), 
+		typeof($ownerclass$), 
+		new FrameworkPropertyMetadata($defaultvalue$));
+#endregion
+
+$end$]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

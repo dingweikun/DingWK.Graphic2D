@@ -53,11 +53,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="CustomControl1.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Geometric\Circular.cs" />
+    <Compile Include="Geometric\Ellipse.cs" />
+    <Compile Include="Geometric\Geometry.cs" />
+    <Compile Include="Geometric\Isogon.cs" />
+    <Compile Include="Geometric\Polygon.cs" />
+    <Compile Include="Geometric\RoundedRect.cs" />
+    <Compile Include="Geometric\Sector.cs" />
+    <Compile Include="GeometryRenders\EllipseRender.cs" />
+    <Compile Include="GeometryRenders\GeometryRenderAttribute.cs" />
+    <Compile Include="GeometryRenders\GeometryRenderManager.cs" />
+    <Compile Include="GeometryRenders\IGeometryRender.cs" />
+    <Compile Include="GeometryRenders\IsogonRender.cs" />
+    <Compile Include="GeometryRenders\RoundedRectRender.cs" />
+    <Compile Include="GraphicVisuals\GeometryVisual.cs" />
+    <Compile Include="GraphicVisuals\GraphicVisual.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -80,5 +92,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

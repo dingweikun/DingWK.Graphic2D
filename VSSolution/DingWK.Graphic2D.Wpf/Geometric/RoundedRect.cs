@@ -1,28 +1,30 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Windows;
+using System.Windows.Media;
 
-namespace DingWK.Graphic2D.Geometric
+namespace DingWK.Graphic2D.Wpf.Geometric
 {
     public sealed class RoundedRect : Geometry
     {
         #region fields
 
-        private Vector2 _location;
-        private Vector2 _size;
-        private Vector2 _radius;
+        private Vector _location;
+        private Vector _size;
+        private Vector _radius;
 
         #endregion
 
         #region constructors
 
-        public RoundedRect(Vector2 location, Vector2 size, Vector2 radius = new Vector2())
+        public RoundedRect(Vector location, Vector size, Vector radius = new Vector())
         {
             Location = location;
             Size = size;
             Radius = radius;
         }
 
-        public RoundedRect(float x, float y, float width, float height)
-            : this(new Vector2(x, y), new Vector2(width, height))
+        public RoundedRect(double x, double y, double width, double height)
+            : this(new Vector(x, y), new Vector(width, height))
         {
         }
 
@@ -30,7 +32,7 @@ namespace DingWK.Graphic2D.Geometric
 
         #region properties
 
-        public Vector2 Radius
+        public Vector Radius
         {
             get => _radius;
             set
@@ -40,37 +42,37 @@ namespace DingWK.Graphic2D.Geometric
             }
         }
 
-        public float RadiusX
+        public double RadiusX
         {
             get => _radius.X;
             set => _radius.X = value < 0 ? 0 : value;
         }
 
-        public float RadiusY
+        public double RadiusY
         {
             get => _radius.Y;
             set => _radius.Y = value < 0 ? 0 : value;
         }
 
-        public Vector2 Location
+        public Vector Location
         {
             get => _location;
             set => _location = value;
         }
 
-        public float X
+        public double X
         {
             get => _location.X;
             set => _location.X = value;
         }
 
-        public float Y
+        public double Y
         {
             get => _location.Y;
             set => _location.Y = value;
         }
 
-        public Vector2 Size
+        public Vector Size
         {
             get => _size;
             set
@@ -80,29 +82,25 @@ namespace DingWK.Graphic2D.Geometric
             }
         }
 
-        public float Width
+        public double Width
         {
             get => _size.X;
             set => _size.X = value < 0 ? 0 : value;
         }
 
-        public float Height
+        public double Height
         {
             get => _size.Y;
             set => _size.Y = value < 0 ? 0 : value;
         }
 
-        protected override Vector2[] GeometryTransformVectors => new Vector2[] { Location, Size };
-
         #endregion
 
         public override object Clone() => new RoundedRect(Location, Size, Radius);
 
-        protected override void SetGeometryTransformVectors(Vector2[] vectors)
+        public override void Transform(Matrix matrix)
         {
-            base.SetGeometryTransformVectors(vectors);
-            Location = vectors[0];
-            Size = vectors[1];
+            throw new NotImplementedException();
         }
 
     }
