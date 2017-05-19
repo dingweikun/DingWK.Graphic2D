@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DingWK.Graphic2D.Wpf.GeometryRenders;
+using System;
 using System.Windows;
+using System.Windows.Media;
 
 namespace DingWK.Graphic2D.Wpf.GraphicVisuals
 {
@@ -25,14 +27,21 @@ namespace DingWK.Graphic2D.Wpf.GraphicVisuals
                 new FrameworkPropertyMetadata(null, (d, e) => (d as GeometryVisual).UpdateVisualRender()));
         #endregion
     }
-    
+
 
 
     public sealed class GeometryVisual<T> : GeometryVisual where T : Geometric.Geometry
     {
         public override void UpdateVisualRender()
         {
-            throw new NotImplementedException();
+            var render = GeometryRenderManager.GetRender<T>();
+            if (render != null)
+            {
+                using (DrawingContext dc = RenderOpen())
+                {
+                    render.Draw(dc, (T)Geometry, Strok, Fill);
+                }
+            }
         }
     }
 

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleFrameworkTest", "Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DingWK.Graphic2D.Wpf", "DingWK.Graphic2D.Wpf\DingWK.Graphic2D.Wpf.csproj", "{B1BD50E7-C89C-4E38-B703-657634A931EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTest", "WpfTest\WpfTest.csproj", "{054EDBA6-E202-453E-BC58-1F756BC17D52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B1BD50E7-C89C-4E38-B703-657634A931EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1BD50E7-C89C-4E38-B703-657634A931EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1BD50E7-C89C-4E38-B703-657634A931EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{054EDBA6-E202-453E-BC58-1F756BC17D52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{054EDBA6-E202-453E-BC58-1F756BC17D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{054EDBA6-E202-453E-BC58-1F756BC17D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{054EDBA6-E202-453E-BC58-1F756BC17D52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
