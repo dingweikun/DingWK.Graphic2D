@@ -4,6 +4,7 @@
     xmlns:ctrls="clr-namespace:DingWK.Graphic2D.Wpf.Controls"
     xmlns:ruler="clr-namespace:DingWK.Graphic2D.Wpf.Controls.Rulers"
     xmlns:graph="clr-namespace:DingWK.Graphic2D.Wpf.GraphicVisuals"
+    xmlns:pages="clr-namespace:DingWK.Graphic2D.Wpf.Controls.Pages"
     xmlns:local="clr-namespace:DingWK.Graphic2D.Wpf">
 
 
@@ -39,6 +40,11 @@
                                                 GridBrush="{TemplateBinding GridBrush}"
                                                 PageBrush="{TemplateBinding PageBrush}"
                                                 ShowGrid="{TemplateBinding GridVisible}"/>-->
+
+                                        <pages:GridPage x:Name="PART_GridPage"
+                                                        GridColor="Red"
+                                                        PageBackground="LightYellow"
+                                                        />
 
                                         <graph:GraphicVisualHost x:Name="PART_GraphicVisualHost"/>
 

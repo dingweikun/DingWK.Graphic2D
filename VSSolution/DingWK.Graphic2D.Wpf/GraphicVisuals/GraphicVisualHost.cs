@@ -19,7 +19,5 @@ namespace DingWK.Graphic2D.Wpf.GraphicVisuals
 
         protected override Visual GetVisualChild(int index) => _children[index];
 
-
-
     }
 }

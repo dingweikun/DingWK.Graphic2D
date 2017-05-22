@@ -49,7 +49,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\DpiHelper.cs" />
     <Compile Include="Controls\GraphicVisualCanvas.cs" />
+    <Compile Include="Controls\Pages\GridPage.cs" />
+    <Compile Include="Controls\Pages\IGrid.cs" />
+    <Compile Include="Controls\Pages\IPage.cs" />
     <Compile Include="Controls\Rulers\HorRuler.cs" />
     <Compile Include="Controls\Rulers\Ruler.cs" />
     <Compile Include="Controls\Rulers\VerRuler.cs" />
@@ -98,6 +102,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
