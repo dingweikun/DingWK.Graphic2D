@@ -49,12 +49,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Controls\GraphicVisualCanvas.cs" />
+    <Compile Include="Controls\Rulers\HorRuler.cs" />
+    <Compile Include="Controls\Rulers\Ruler.cs" />
+    <Compile Include="Controls\Rulers\VerRuler.cs" />
     <Compile Include="Geometric\Circular.cs" />
     <Compile Include="Geometric\Ellipse.cs" />
     <Compile Include="Geometric\Geometry.cs" />
@@ -70,6 +68,7 @@
     <Compile Include="GeometryRenders\RoundedRectRender.cs" />
     <Compile Include="GraphicVisuals\GeometryVisual.cs" />
     <Compile Include="GraphicVisuals\GraphicVisual.cs" />
+    <Compile Include="GraphicVisuals\GraphicVisualHost.cs" />
     <Compile Include="GraphicVisuals\Placement.cs" />
     <Compile Include="GraphicVisuals\VisualStyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -95,7 +94,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controls\" />
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

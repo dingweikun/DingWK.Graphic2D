@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTest"
+        xmlns:g2d="clr-namespace:DingWK.Graphic2D.Wpf.GraphicVisuals;assembly=DingWK.Graphic2D.Wpf"
+        xmlns:ctr="clr-namespace:DingWK.Graphic2D.Wpf.Controls;assembly=DingWK.Graphic2D.Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <ctr:GraphicVisualCanvas Background="LightBlue">
+            <!--<g2d:GraphicVisualHost x:Name="host"/>-->            
+        </ctr:GraphicVisualCanvas>
     </Grid>
 </Window>

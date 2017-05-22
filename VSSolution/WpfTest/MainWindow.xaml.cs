@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DingWK.Graphic2D.Wpf.Geometric;
+using DingWK.Graphic2D.Wpf.GraphicVisuals;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,21 @@ namespace WpfTest
         public MainWindow()
         {
             InitializeComponent();
+
+
+            RoundedRect rect = new RoundedRect(10, 10, 200, 100);
+
+            GeometryVisual visual = new GeometryVisual<RoundedRect>();
+            visual.Geometry = rect;
+
+            VisualStyle style = new VisualStyle();
+            style.Strok = new Pen(Brushes.Red, 4);
+
+            visual.VisualStyle = style;
+
+            //host.Children.Add(visual);
+
+
         }
     }
 }
