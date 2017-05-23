@@ -64,11 +64,39 @@ namespace DingWK.Graphic2D.Wpf.Controls
         public AdornerDecorator AdornerDecorator => _adornerDecorator;
         public GraphicVisualHost GraphicVisualHost => _graphicVisualHost;
 
-        Size IPage.MaxPageSize => ((IPage)_gridPage).MaxPageSize;
-        Size IPage.MinPageSize => ((IPage)_gridPage).MinPageSize;
+        Size IPage.MaxPageSize => _gridPage.MaxPageSize;
+        Size IPage.MinPageSize => _gridPage.MinPageSize;
+
+        public Brush PageBackground
+        {
+            get => _gridPage.PageBackground;
+            set => _gridPage.PageBackground = value;
+        }
+
+        #endregion
+                
+
+        #region AccentBrush
+        /// <summary>
+        /// 
+        /// </summary>
+        public Brush AccentBrush
+        {
+            get { return (Brush)GetValue(AccentBrushProperty); }
+            set { SetValue(AccentBrushProperty, value); }
+        }
+        //
+        // Dependency property definition
+        //
+        public static readonly DependencyProperty AccentBrushProperty =
+            DependencyProperty.Register(
+                nameof(AccentBrush),
+                typeof(Brush),
+                typeof(GraphicVisualCanvas),
+                new FrameworkPropertyMetadata(Brushes.Gray.CloneCurrentValue(), FrameworkPropertyMetadataOptions.AffectsRender));
         #endregion
 
-
+        
         #region PageOffset
         /// <summary>
         /// 
@@ -91,6 +119,7 @@ namespace DingWK.Graphic2D.Wpf.Controls
                     PropertyChangedCallback = (d, e) => (d as GraphicVisualCanvas).SetContentTransform()
                 });
         #endregion
+
 
         #region PageSize
         /// <summary>
@@ -116,7 +145,6 @@ namespace DingWK.Graphic2D.Wpf.Controls
         #endregion
 
 
-
         #region ZoomScale
         /// <summary>
         /// 
@@ -134,7 +162,7 @@ namespace DingWK.Graphic2D.Wpf.Controls
                 nameof(ZoomScale),
                 typeof(double),
                 typeof(GraphicVisualCanvas),
-                new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.AffectsRender)
+                new FrameworkPropertyMetadata(1.0)
                 {
 
                 });
@@ -144,8 +172,31 @@ namespace DingWK.Graphic2D.Wpf.Controls
 
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateScrollBars()
+        {
+            if (Canvas == null) return;
 
-        public Brush PageBackground { get => ((IPage)_gridPage).PageBackground; set => ((IPage)_gridPage).PageBackground = value; }
+            if (_horScrollBar != null)
+            {
+                _horScrollBar.Minimum = -Canvas.RenderSize.Width / 2;
+                _horScrollBar.Maximum = -Canvas.RenderSize.Width / 2 + Page.PageSize.Width * ZoomScale;
+                _horScrollBar.SmallChange = Canvas.RenderSize.Width / 50;
+                _horScrollBar.LargeChange = Canvas.RenderSize.Width;
+                _horScrollBar.ViewportSize = Canvas.RenderSize.Width;
+            }
+
+            if (_verScrollBar != null)
+            {
+                _verScrollBar.Minimum = -Canvas.RenderSize.Height / 2;
+                _verScrollBar.Maximum = -Canvas.RenderSize.Height / 2 + Page.PageSize.Height * ZoomScale;
+                _verScrollBar.SmallChange = Canvas.RenderSize.Height / 50;
+                _verScrollBar.LargeChange = Canvas.RenderSize.Height;
+                _verScrollBar.ViewportSize = Canvas.RenderSize.Height;
+            }
+        }
 
 
 
@@ -161,14 +212,19 @@ namespace DingWK.Graphic2D.Wpf.Controls
             // set host scale & translate 
 
             TransformGroup trx = new TransformGroup();
-            trx.Children.Add(new ScaleTransform(PageScale, PageScale));
-            trx.Children.Add(new TranslateTransform(PageOffsetX, PageOffsetY));
+            trx.Children.Add(new ScaleTransform(ZoomScale, ZoomScale));
+            trx.Children.Add(new TranslateTransform(PageOffset.X, PageOffset.Y));
             GraphicVisualHost.RenderTransform = trx;
         }
 
 
 
 
+        private void SetViewportFitFullPage()
+        {
+            
+            throw new NotImplementedException();
+        }
 
 
 

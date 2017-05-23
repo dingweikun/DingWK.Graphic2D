@@ -53,18 +53,18 @@
                             </Border>
 
 
-                            <!--<ScrollBar x:Name="PART_HorScrollBar" Grid.Row="2" Grid.Column="1" Orientation="Horizontal"
-                                       Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageOffsetX, Converter={StaticResource DoubleNegativeConverter}}"/>
-                            <ScrollBar x:Name="PART_VerScrollBar" Grid.Row="1" Grid.Column="2" Orientation="Vertical"
-                                       Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageOffsetY, Converter={StaticResource DoubleNegativeConverter}}"/>-->
+                            <ScrollBar x:Name="PART_HorScrollBar" Grid.Row="2" Grid.Column="1" Orientation="Horizontal"/>
+                            <!--Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageOffsetX, Converter={StaticResource DoubleNegativeConverter}}"/>-->
+                            <ScrollBar x:Name="PART_VerScrollBar" Grid.Row="1" Grid.Column="2" Orientation="Vertical"/>
+                            <!--Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageOffsetY, Converter={StaticResource DoubleNegativeConverter}}"/>-->
 
                                             <!--ZoomScale="{TemplateBinding PageScale}" OrignPosition="{TemplateBinding PageOffsetX}"-->
                             <ruler:HorRuler x:Name="PART_HorRuler"  Grid.Row="0" Grid.Column="1" Margin="0 0 0 2"
+                                            TickColor="{TemplateBinding AccentBrush}" TickTextColor="{TemplateBinding AccentBrush}" 
                                             BackColor="{TemplateBinding Background}"/>
-                                            <!--TickColor="{TemplateBinding GridBrush}" TickTextColor="{TemplateBinding GridBrush}"--> 
                             <ruler:VerRuler x:Name="PART_VerRuler"  Grid.Row="1" Grid.Column="0" Margin="0 0 2 0"
+                                            TickColor="{TemplateBinding AccentBrush}" TickTextColor="{TemplateBinding AccentBrush}" 
                                             BackColor="{TemplateBinding Background}"/>
-                                            <!--TickColor="{TemplateBinding GridBrush}" TickTextColor="{TemplateBinding GridBrush}"--> 
                                             <!--ZoomScale="{TemplateBinding PageScale}" OrignPosition="{TemplateBinding PageOffsetY}"-->
 
                         </Grid>
