@@ -7,10 +7,10 @@ namespace DingWK.Graphic2D.Wpf.Controls.Rulers
     internal abstract class Ruler : FrameworkElement
     {
         protected double Start { get; set; }
-        protected double StartValue => (Start - OrignPosition) / ZoomScale;
+        protected double StartValue => (Start - OrignPosition) / ScaleFactor;
         protected double MinorTickCount { get; set; }
         protected double MinorTickSpacingValue { get; set; }
-        protected double MinorTickSpacing => MinorTickSpacingValue * ZoomScale;
+        protected double MinorTickSpacing => MinorTickSpacingValue * ScaleFactor;
 
 
         #region OrignPosition 
@@ -97,21 +97,21 @@ namespace DingWK.Graphic2D.Wpf.Controls.Rulers
         #endregion
 
 
-        #region ZoomScale 
+        #region ScaleFactor 
         /// <summary>
         /// Zoom scale of ruler
         /// </summary>
-        public double ZoomScale
+        public double ScaleFactor
         {
-            get { return (double)GetValue(ZoomScaleProperty); }
-            set { SetValue(ZoomScaleProperty, value); }
+            get { return (double)GetValue(ScaleFactorProperty); }
+            set { SetValue(ScaleFactorProperty, value); }
         }
         //
         // Dependency property definition
         //
-        public static readonly DependencyProperty ZoomScaleProperty =
+        public static readonly DependencyProperty ScaleFactorProperty =
             DependencyProperty.Register(
-                nameof(ZoomScale),
+                nameof(ScaleFactor),
                 typeof(double),
                 typeof(Ruler),
                 new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.AffectsRender));
@@ -154,7 +154,7 @@ namespace DingWK.Graphic2D.Wpf.Controls.Rulers
             // Dynamicly calculate ruler tick spaceing values. TickSpacing = MinorTickSpacing x 5
             //
 
-            double designTickSpacingValue = DesignTickSpacing / ZoomScale;
+            double designTickSpacingValue = DesignTickSpacing / ScaleFactor;
 
             double radix = designTickSpacingValue < 1 ? 0.1 : 10;
 
@@ -178,8 +178,8 @@ namespace DingWK.Graphic2D.Wpf.Controls.Rulers
             //
 
             Start = OrignPosition <= 0 ?
-                OrignPosition - (int)(OrignPosition / (tickSpacingValue * ZoomScale)) * tickSpacingValue * ZoomScale :
-                OrignPosition - (int)(OrignPosition / (tickSpacingValue * ZoomScale) + 1) * tickSpacingValue * ZoomScale;
+                OrignPosition - (int)(OrignPosition / (tickSpacingValue * ScaleFactor)) * tickSpacingValue * ScaleFactor :
+                OrignPosition - (int)(OrignPosition / (tickSpacingValue * ScaleFactor) + 1) * tickSpacingValue * ScaleFactor;
 
         }
 

@@ -5,10 +5,15 @@
     xmlns:ruler="clr-namespace:DingWK.Graphic2D.Wpf.Controls.Rulers"
     xmlns:graph="clr-namespace:DingWK.Graphic2D.Wpf.GraphicVisuals"
     xmlns:pages="clr-namespace:DingWK.Graphic2D.Wpf.Controls.Pages"
+    xmlns:cnvrt="clr-namespace:DingWK.Graphic2D.Wpf.Converters"
     xmlns:local="clr-namespace:DingWK.Graphic2D.Wpf">
 
 
     <Style TargetType="{x:Type ctrls:GraphicVisualCanvas}">
+        <Style.Resources>
+            <cnvrt:VectorToDoublesConverter x:Key="VectorToDoubles"/>
+            <cnvrt:DoubleNagtiveConverter x:Key="DoubleNegtive"/>
+        </Style.Resources>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrls:GraphicVisualCanvas}">
@@ -32,18 +37,10 @@
                                 <AdornerDecorator x:Name="PART_AdornerDecorator">
                                     <Canvas x:Name="PART_Canvas" Grid.Row="1" Grid.Column="1" Background="Transparent">
 
-                                        <!--<ctrls:PageGrid x:Name="PART_PageGrid" 
-                                                Scale="{TemplateBinding PageScale}"
-                                                Width="{TemplateBinding PageWidth}"
-                                                Height="{TemplateBinding PageHeight}"
-                                                GridSize="{TemplateBinding GridSize}"
-                                                GridBrush="{TemplateBinding GridBrush}"
-                                                PageBrush="{TemplateBinding PageBrush}"
-                                                ShowGrid="{TemplateBinding GridVisible}"/>-->
-
                                         <pages:GridPage x:Name="PART_GridPage"
-                                                        GridColor="Red"
-                                                        PageBackground="LightYellow"
+                                                        Scale="{TemplateBinding ZoomScale}"
+                                                        PageSize="{TemplateBinding PageSize}"
+                                                        GridBrush="{TemplateBinding AccentBrush}"
                                                         />
 
                                         <graph:GraphicVisualHost x:Name="PART_GraphicVisualHost"/>
@@ -53,28 +50,34 @@
                             </Border>
 
 
-                            <ScrollBar x:Name="PART_HorScrollBar" Grid.Row="2" Grid.Column="1" Orientation="Horizontal"/>
-                            <!--Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageOffsetX, Converter={StaticResource DoubleNegativeConverter}}"/>-->
-                            <ScrollBar x:Name="PART_VerScrollBar" Grid.Row="1" Grid.Column="2" Orientation="Vertical"/>
-                            <!--Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageOffsetY, Converter={StaticResource DoubleNegativeConverter}}"/>-->
+                            <ScrollBar x:Name="PART_HorScrollBar" Grid.Row="2" Grid.Column="1" Orientation="Horizontal"  
+                                       Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageOffsetX, Converter={StaticResource DoubleNegtive}}"/>
+                            <ScrollBar x:Name="PART_VerScrollBar" Grid.Row="1" Grid.Column="2" Orientation="Vertical" 
+                                       Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageOffsetY, Converter={StaticResource DoubleNegtive}}"/>
 
-                                            <!--ZoomScale="{TemplateBinding PageScale}" OrignPosition="{TemplateBinding PageOffsetX}"-->
                             <ruler:HorRuler x:Name="PART_HorRuler"  Grid.Row="0" Grid.Column="1" Margin="0 0 0 2"
+                                            ScaleFactor="{TemplateBinding ZoomScale}" OrignPosition="{TemplateBinding PageOffsetX}"
                                             TickColor="{TemplateBinding AccentBrush}" TickTextColor="{TemplateBinding AccentBrush}" 
                                             BackColor="{TemplateBinding Background}"/>
                             <ruler:VerRuler x:Name="PART_VerRuler"  Grid.Row="1" Grid.Column="0" Margin="0 0 2 0"
                                             TickColor="{TemplateBinding AccentBrush}" TickTextColor="{TemplateBinding AccentBrush}" 
+                                            ScaleFactor="{TemplateBinding ZoomScale}" OrignPosition="{TemplateBinding PageOffsetY}"
                                             BackColor="{TemplateBinding Background}"/>
-                                            <!--ZoomScale="{TemplateBinding PageScale}" OrignPosition="{TemplateBinding PageOffsetY}"-->
 
                         </Grid>
-
-
-
-
-                    </Border>
+                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+ 
+        <Setter Property="PageOffset">
+            <Setter.Value>
+                <MultiBinding Mode="TwoWay" Converter="{StaticResource VectorToDoubles}">
+                    <Binding RelativeSource="{RelativeSource Self}" Path="PageOffsetX" Mode="TwoWay"/>
+                    <Binding RelativeSource="{RelativeSource Self}" Path="PageOffsetY" Mode="TwoWay"/>
+                </MultiBinding>
+            </Setter.Value>
+        </Setter>
+        
     </Style>
 </ResourceDictionary>

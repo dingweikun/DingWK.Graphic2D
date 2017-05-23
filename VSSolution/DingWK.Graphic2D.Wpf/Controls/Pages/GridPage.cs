@@ -9,8 +9,9 @@ namespace DingWK.Graphic2D.Wpf.Controls.Pages
     {
         protected const int GridSizeInterval = 5;
 
-        public Size MaxPageSize => new Size(0, 0);
-        public Size MinPageSize => new Size(1e6, 1e6);
+        public Size MinPageSize => new Size(10, 10);
+        public Size MaxPageSize => new Size(1e6, 1e6);
+
 
         #region Scale
         /// <summary>
@@ -51,7 +52,7 @@ namespace DingWK.Graphic2D.Wpf.Controls.Pages
                 typeof(GridPage),
                 new FrameworkPropertyMetadata(10, FrameworkPropertyMetadataOptions.AffectsRender));
         #endregion
-
+        
         #region GridVisibility
         /// <summary>
         /// 
@@ -72,24 +73,24 @@ namespace DingWK.Graphic2D.Wpf.Controls.Pages
                 new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender));
         #endregion
 
-        #region GridColor
+        #region GridBrush
         /// <summary>
         /// 
         /// </summary>
-        public Color GridColor
+        public Brush GridBrush
         {
-            get { return (Color)GetValue(GridColorProperty); }
-            set { SetValue(GridColorProperty, value); }
+            get { return (Brush)GetValue(GridBrushProperty); }
+            set { SetValue(GridBrushProperty, value); }
         }
         //
         // Dependency property definition
         //
-        public static readonly DependencyProperty GridColorProperty =
+        public static readonly DependencyProperty GridBrushProperty =
             DependencyProperty.Register(
-                nameof(GridColor),
-                typeof(Color),
+                nameof(GridBrush),
+                typeof(Brush),
                 typeof(GridPage),
-                new FrameworkPropertyMetadata(Colors.Black, FrameworkPropertyMetadataOptions.AffectsRender));
+                new FrameworkPropertyMetadata(Brushes.Gray.CloneCurrentValue(), FrameworkPropertyMetadataOptions.AffectsRender));
         #endregion
 
         #region PageSize
@@ -111,17 +112,21 @@ namespace DingWK.Graphic2D.Wpf.Controls.Pages
                 typeof(GridPage),
                 new FrameworkPropertyMetadata(new Size(400, 300), FrameworkPropertyMetadataOptions.AffectsRender)
                 {
-                    CoerceValueCallback = (d, baseValue) =>
-                    {
-                        Size size = (Size)baseValue;
-                        IPage page = (IPage)d;
-                        size.Width = size.Width < page.MinPageSize.Width ? page.MinPageSize.Width : size.Width;
-                        size.Width = size.Width > page.MaxPageSize.Width ? page.MaxPageSize.Width : size.Width;
-                        size.Height = size.Height < page.MinPageSize.Height ? page.MinPageSize.Height : size.Height;
-                        size.Height = size.Height > page.MaxPageSize.Height ? page.MaxPageSize.Height : size.Height;
-                        return size;
-                    }
+                    CoerceValueCallback = CoercePageSizeValue
                 });
+        //
+        // CoerceValueCallback
+        //
+        public static object CoercePageSizeValue(DependencyObject d, object baseValue)
+        {
+            Size size = (Size)baseValue;
+            IPage page = (IPage)d;
+            size.Width = size.Width < page.MinPageSize.Width ? page.MinPageSize.Width : size.Width;
+            size.Width = size.Width > page.MaxPageSize.Width ? page.MaxPageSize.Width : size.Width;
+            size.Height = size.Height < page.MinPageSize.Height ? page.MinPageSize.Height : size.Height;
+            size.Height = size.Height > page.MaxPageSize.Height ? page.MaxPageSize.Height : size.Height;
+            return size;
+        }
         #endregion
 
         #region PageBackground
@@ -155,8 +160,8 @@ namespace DingWK.Graphic2D.Wpf.Controls.Pages
             double xlen = PageSize.Width * Scale;
             double ylen = PageSize.Height * Scale;
 
-            SolidColorBrush brush = new SolidColorBrush(GridColor);
-            Pen majorPen = new Pen(brush.CloneCurrentValue(), 1 * dpiFactor);
+            Pen majorPen = new Pen(GridBrush, 1 * dpiFactor);
+            Brush brush = GridBrush.CloneCurrentValue();
             brush.Opacity = 0.4;
             Pen minorPen = new Pen(brush, 1 * dpiFactor);
 
@@ -218,3 +223,5 @@ namespace DingWK.Graphic2D.Wpf.Controls.Pages
 
     }
 }
+
+

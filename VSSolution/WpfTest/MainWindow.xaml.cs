@@ -41,5 +41,11 @@ namespace WpfTest
 
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(
+                $"canvas {cc.Canvas.RenderSize} offset {cc.PageOffset} page {cc.PageSize} scale {cc.ZoomScale}" );
+        }
     }
 }

@@ -8,6 +8,6 @@ namespace DingWK.Graphic2D.Wpf.Controls.Pages
 
         bool GridVisibility { get; set; }
 
-        Color GridColor { get; set; }
+        Brush GridBrush { get; set; }
     }
 }
